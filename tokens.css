@@ -1,4 +1,4 @@
-/* Foundry — generated from tokens.json */
+/* Foundry, generated from tokens.json */
 @font-face { font-family: 'Space Grotesk'; src: url('fonts/space-grotesk.woff2') format('woff2'); font-weight: 300 700; font-display: swap; }
 @font-face { font-family: 'JetBrains Mono'; src: url('fonts/jetbrains-mono.woff2') format('woff2'); font-weight: 400 700; font-display: swap; }
 :root, [data-theme='dark'] {

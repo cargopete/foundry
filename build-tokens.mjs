@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const t = JSON.parse(readFileSync(new URL('./tokens.json', import.meta.url)));
 const [first, ...rest] = t.color.themes.map((x) => x.id);
 const val = (tok, th) => (typeof tok.value === 'string' ? tok.value : tok.value[th] ?? tok.value[first]);
-let css = `/* Foundry — generated from tokens.json */\n`;
+let css = `/* Foundry, generated from tokens.json */\n`;
 for (const f of t.type.fonts) css += `@font-face { font-family: '${f.family}'; src: url('fonts/${f.file.split('/').pop()}') format('woff2'); font-weight: ${f.weight}; font-display: swap; }\n`;
 css += `:root, [data-theme='${first}'] {\n` + t.color.tokens.map((c) => `  --${c.name}: ${val(c, first)};`).join('\n') + `\n  color-scheme: dark;\n}\n`;
 for (const th of rest) {
