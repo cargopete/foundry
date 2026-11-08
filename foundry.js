@@ -196,7 +196,7 @@
   function NixieCounter(el, opts) {
     opts = opts || {};
     var n = opts.digits || 8;
-    var S = stage(el, { camera: [0, 0.35, n * 1.15 + 2.2], target: [0, 0.1, 0], fov: 30, fit: [n * 1.0 + 0.2, 2.3] });
+    var S = stage(el, { camera: [0, 0.35, n * 1.15 + 2.2], target: [0, 0.1, 0], fov: 30, fit: [n * 1.0 + 0.8, 2.9] });
     var THREE = S.THREE, M = materials(THREE), hTex = haloTexture(THREE);
     var glowHex = '#' + M.glow.getHexString();
     var gap = 1.0, tubes = [];
