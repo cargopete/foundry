@@ -1,0 +1,68 @@
+/* Foundry — generated from tokens.json */
+@font-face { font-family: 'Space Grotesk'; src: url('fonts/space-grotesk.woff2') format('woff2'); font-weight: 300 700; font-display: swap; }
+@font-face { font-family: 'JetBrains Mono'; src: url('fonts/jetbrains-mono.woff2') format('woff2'); font-weight: 400 700; font-display: swap; }
+:root, [data-theme='dark'] {
+  --bg: #171614;
+  --bg-elev: #201f1c;
+  --bg-code: #1b1a17;
+  --bg-inset: #262420;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-hi: rgba(255, 255, 255, 0.16);
+  --text: #ece9e3;
+  --text-muted: #9c978c;
+  --text-faint: #6e6a61;
+  --accent: #d0704f;
+  --accent-ink: #f2cbbb;
+  --on-accent: #171614;
+  --pale-accent-bg: rgba(208, 112, 79, 0.12);
+  --bad: #e36b6b;
+  --bad-ink: #f5c4c4;
+  --pale-bad-bg: rgba(227, 107, 107, 0.12);
+  --ok: #86b592;
+  --warn: #cdb06a;
+  --metal-copper: #b8734a;
+  --metal-brass: #a8863a;
+  --metal-iron: #2a2622;
+  --metal-verdigris: #5f8f7a;
+  --material-bakelite: #2b1c14;
+  --glow-valve: #ff8a4c;
+  color-scheme: dark;
+}
+:root[data-theme='light'] {
+  --bg: #fbfbfa;
+  --bg-elev: #ffffff;
+  --bg-code: #f7f6f3;
+  --bg-inset: #f2f1ec;
+  --border: #eaeaea;
+  --border-hi: rgba(0, 0, 0, 0.14);
+  --text: #2f3437;
+  --text-muted: #57554f;
+  --text-faint: #6e6b64;
+  --accent: #a8481f;
+  --accent-ink: #7a3217;
+  --on-accent: #fbfbfa;
+  --pale-accent-bg: #f7e6de;
+  --bad: #b3261e;
+  --bad-ink: #8c1d17;
+  --pale-bad-bg: #fbe4e2;
+  --ok: #346538;
+  --warn: #8a6400;
+  color-scheme: light;
+}
+:root {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, "Helvetica Neue", sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-18: 72px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+  --shadow-float: 0 30px 80px -20px rgba(0, 0, 0, 0.7);
+}
