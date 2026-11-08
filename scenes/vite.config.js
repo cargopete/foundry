@@ -5,6 +5,7 @@ export default defineConfig({
   build: {
     lib: { entry: 'src/index.js', formats: ['es'], fileName: () => 'scenes.js' },
     outDir: 'dist',
+    minify: 'esbuild',
     emptyOutDir: true,
   },
 });
