@@ -113,17 +113,21 @@ export function createAmbient(canvas, opts = {}) {
     k = vh / height;
     const halfW = (vh * camera.aspect) / 2;
     const content = opts.contentWidth ?? 1296; // px of the text column to keep clear
-    const clear = Math.min(halfW * 0.85, (content / 2 / width) * vh * camera.aspect * 0.78);
+    const colShare = Math.min(1, content / width); // the text column as a share of the canvas width
     const spacing = opts.spacing ?? 380; // px between parts on one side
     for (let y = window.innerHeight * 0.95; y < doc - 200; y += spacing * (0.7 + rand() * 0.6)) {
       for (const side of [-1, 1]) {
         if (rand() < 0.3) continue;
+        const depth = 11 + rand() * 9;
+        // The whole column stays clear. A part is about 1.3 units wide at scale 1: it shrinks to fit
+        // the margin beside the column, and is left out where the margin is too narrow for it.
+        const hw = halfW * (depth / 10), col = hw * colShare, margin = hw - col;
+        const scale = Math.min(0.75 + rand() * 0.7, margin / 1.4);
+        if (scale < 0.35) continue;
         const name = kit[Math.floor(rand() * kit.length)];
         const { g, spin } = PARTS[name](M, rand);
-        const depth = 11 + rand() * 9;
-        const scale = 0.75 + rand() * 0.7;
-        const xRoom = Math.max(0.2, halfW * (depth / 10) - clear * (depth / 10));
-        g.position.set(side * (clear * (depth / 10) + xRoom * (0.25 + rand() * 0.6)), -(y + (rand() - 0.5) * 120) * k, 10 - depth);
+        const free = Math.max(0, margin - 1.3 * scale);
+        g.position.set(side * (col + 0.65 * scale + free * rand()), -(y + (rand() - 0.5) * 120) * k, 10 - depth);
         g.scale.setScalar(scale);
         g.rotation.x = (rand() - 0.5) * 0.4;
         scene.add(g);
