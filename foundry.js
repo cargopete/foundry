@@ -122,6 +122,12 @@
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
+      // frame the machine to the container: whichever of its width or height binds first
+      if (o.fit) {
+        var vf = camera.fov * Math.PI / 180, hf = 2 * Math.atan(Math.tan(vf / 2) * camera.aspect);
+        var d = Math.max((o.fit[0] / 2) / Math.tan(hf / 2), (o.fit[1] / 2) / Math.tan(vf / 2)) * (o.margin || 1.12);
+        base.z = target.z + d;
+      }
     }
     function frame(now) {
       var t = now / 1000;
@@ -190,7 +196,7 @@
   function NixieCounter(el, opts) {
     opts = opts || {};
     var n = opts.digits || 8;
-    var S = stage(el, { camera: [0, 0.35, n * 1.15 + 2.2], target: [0, 0.1, 0], fov: 30 });
+    var S = stage(el, { camera: [0, 0.35, n * 1.15 + 2.2], target: [0, 0.1, 0], fov: 30, fit: [n * 1.0 + 0.2, 2.3] });
     var THREE = S.THREE, M = materials(THREE), hTex = haloTexture(THREE);
     var glowHex = '#' + M.glow.getHexString();
     var gap = 1.0, tubes = [];
@@ -247,7 +253,7 @@
   function ValveRadio(el, opts) {
     opts = opts || {};
     var min = opts.min || 0, max = opts.max == null ? 100 : opts.max;
-    var S = stage(el, { camera: [0, 0.5, 11], target: [0, 0.35, 0], fov: 30 });
+    var S = stage(el, { camera: [0, 0.5, 11], target: [0, 0.35, 0], fov: 30, fit: [3.9, 5.0] });
     var THREE = S.THREE, M = materials(THREE), hTex = haloTexture(THREE);
     var glowHex = '#' + M.glow.getHexString();
     var root = new THREE.Group(); S.scene.add(root);
@@ -354,7 +360,7 @@
   // ---------- CRTTerminal: a phosphor screen in a bakelite case ----------
   function CRTTerminal(el, opts) {
     opts = opts || {};
-    var S = stage(el, { camera: [0, 0.15, 7.2], target: [0, 0.05, 0], fov: 32 });
+    var S = stage(el, { camera: [0, 0.15, 7.2], target: [0, 0.05, 0], fov: 32, fit: [3.9, 3.4] });
     var THREE = S.THREE, M = materials(THREE), hTex = haloTexture(THREE);
     var glowHex = '#' + M.glow.getHexString();
     var root = new THREE.Group(); root.rotation.y = 0.28; S.scene.add(root);
