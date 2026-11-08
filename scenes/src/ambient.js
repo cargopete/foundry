@@ -132,11 +132,12 @@ export function createAmbient(canvas, opts = {}) {
     }
   }
   function resize() {
-    width = window.innerWidth; height = window.innerHeight;
+    const box = canvas.getBoundingClientRect();
+    width = Math.max(1, box.width || window.innerWidth); height = Math.max(1, box.height || window.innerHeight);
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    canvas.style.opacity = width < 920 ? String(opts.phoneOpacity ?? 0.2) : String(opts.opacity ?? 0.6);
+    canvas.style.opacity = window.innerWidth < 920 ? String(opts.phoneOpacity ?? 0.2) : String(opts.opacity ?? 0.6);
     layout();
   }
   let raf = 0, t0 = performance.now(), dirty = true;
