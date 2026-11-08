@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build && esbuild dist/scenes.js --minify --format=esm --outfile=dist/scenes.min.js"
   },
   "devDependencies": {
     "vite": "^6.3.5"
