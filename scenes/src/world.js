@@ -62,11 +62,11 @@ export function createWorld(canvas, opts = {}) {
   });
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), gridMat);
   floor.rotation.x = -Math.PI / 2;
-  scene.add(floor);
+  if (opts.floor !== false) scene.add(floor);
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ color: 0x0f0d0b, roughness: 0.95 }));
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -0.02;
-  scene.add(ground);
+  if (opts.floor !== false) scene.add(ground);
 
   // The sun: brick, banded at its foot, on the horizon.
   const sunMat = new THREE.ShaderMaterial({

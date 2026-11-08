@@ -81,10 +81,47 @@ const PARTS = {
     return { g, spin: (o, t) => { for (let i = 0; i < n; i++) { const x = -0.19 + (i / (n - 1)) * 0.38; pos[i * 3] = x; pos[i * 3 + 1] = Math.sin(x * 40 + t * 2.5) * 0.08; } geo.attributes.position.needsUpdate = true; o.rotation.y = -0.4 + Math.sin(t * 0.1) * 0.2; } };
   },
 };
+// The sea's parts: ice, buoys and flotsam, bobbing rather than turning.
+Object.assign(PARTS, {
+  ice() {
+    const geo = new THREE.IcosahedronGeometry(0.55, 1);
+    const p = geo.attributes.position;
+    const seed = Math.random() * 100, j = (x, y, z) => { const v = Math.sin(Math.round(x * 1000) * 12.9898 + Math.round(y * 1000) * 78.233 + Math.round(z * 1000) * 37.719 + seed) * 43758.5453; return v - Math.floor(v); };
+    for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i), z = p.getZ(i), k = 0.8 + j(x, y, z) * 0.35; p.setXYZ(i, x * k, y * (0.7 + j(z, x, y) * 0.6), z * k); }
+    geo.computeVertexNormals();
+    const g = new THREE.Group();
+    g.add(new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0x8a7f76, roughness: 0.75, flatShading: true })));
+    return { g, spin: (o, t) => { o.position.y += Math.sin(t * 0.8) * 0.0008; o.rotation.y = t * 0.05; } };
+  },
+  buoy(M) {
+    const g = new THREE.Group();
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.32, 0.6, 16), M.copper); g.add(body);
+    const band = new THREE.Mesh(new THREE.CylinderGeometry(0.33, 0.33, 0.12, 16), M.iron); band.position.y = -0.12; g.add(band);
+    const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.6, 6), M.iron); mast.position.y = 0.6; g.add(mast);
+    const lamp = new THREE.Mesh(new THREE.SphereGeometry(0.07, 12, 8), M.glow); lamp.position.y = 0.92; g.add(lamp);
+    return { g, spin: (o, t) => { o.rotation.z = Math.sin(t * 0.9) * 0.18; o.rotation.x = Math.sin(t * 0.7) * 0.1; } };
+  },
+  barrel(M) {
+    const g = new THREE.Group();
+    const b = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.8, 18), M.iron); b.rotation.z = Math.PI / 2; g.add(b);
+    for (const x of [-0.25, 0.25]) { const r = new THREE.Mesh(new THREE.TorusGeometry(0.31, 0.025, 6, 20), M.copper); r.rotation.y = Math.PI / 2; r.position.x = x; g.add(r); }
+    return { g, spin: (o, t) => { o.rotation.x = t * 0.2; o.rotation.z = Math.sin(t * 0.5) * 0.15; } };
+  },
+  anchor(M) {
+    const g = new THREE.Group();
+    const shank = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.0, 8), M.iron); g.add(shank);
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.03, 6, 16), M.iron); ring.position.y = 0.58; g.add(ring);
+    const arm = new THREE.Mesh(new THREE.TorusGeometry(0.4, 0.05, 8, 24, Math.PI), M.iron); arm.rotation.z = Math.PI; arm.position.y = -0.1; g.add(arm);
+    const stock = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.06, 0.06), M.copper); stock.position.y = 0.38; g.add(stock);
+    return { g, spin: (o, t) => { o.rotation.y = t * 0.12; o.rotation.z = Math.sin(t * 0.3) * 0.2; } };
+  },
+});
+
 const KITS = {
   machine: ['valve', 'reel', 'rack', 'coil', 'radio', 'valve', 'reel'],
   workbench: ['radio', 'scope', 'coil', 'valve', 'radio', 'scope'],
   observatory: ['armillary', 'astrolabe', 'armillary', 'reel', 'valve'],
+  sea: ['ice', 'buoy', 'ice', 'barrel', 'anchor', 'ice', 'buoy'],
 };
 
 export function createAmbient(canvas, opts = {}) {

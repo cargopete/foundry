@@ -39,8 +39,9 @@ p { color: #9c978c; font-size: 1rem; max-width: 34ch; }
 import { createMachineRoom } from './src/machine-room.js';
 import { createWorkbench } from './src/workbench.js';
 import { createObservatory } from './src/observatory.js';
+import { createSea } from './src/sea.js';
 const which = new URLSearchParams(location.search).get('scene') || 'machine';
-({ machine: createMachineRoom, workbench: createWorkbench, observatory: createObservatory })[which](document.getElementById('c'));
+({ machine: createMachineRoom, workbench: createWorkbench, observatory: createObservatory, sea: createSea })[which](document.getElementById('c'));
 import('./src/ambient.js').then(({ createAmbient }) => createAmbient(document.getElementById('ambient'), { kit: which }));
 </script>
 </body>
