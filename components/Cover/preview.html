@@ -1,0 +1,49 @@
+<!-- @dsCard height=288 -->
+<div class="cv">
+  <svg class="cv-art" viewBox="0 0 480 288" aria-hidden="true">
+    <!--
+      blocks: accent 168x288 (tall slab, bleeds top and bottom), bg-elev 144x144, accent-ink 96x72, metal-copper 72x72, bad 24x24; radius-md on the interior corners
+      arrangement: one tall slab with satellites, the slab bleeding off the right edge
+      pattern: arcs and ticks of a meter scale, because every instrument in this system reads a figure off a dial
+      steps and radii: space-6 (24) pitch, space-18 (72) unit, radius-md 10, scale radius 120 = 5 x space-6
+    -->
+    <rect class="b-elev" x="96" y="24" width="144" height="144" rx="10"/>
+    <rect class="b-ink" x="96" y="192" width="96" height="72" rx="10"/>
+    <rect class="b-copper" x="216" y="192" width="72" height="72" rx="10"/>
+    <rect class="b-bad" x="48" y="240" width="24" height="24" rx="10"/>
+    <rect class="b-accent" x="312" y="-10" width="178" height="308"/>
+    <path class="arc" d="M 192 168 A 120 120 0 0 1 432 168"/>
+    <path class="arc" d="M 216 168 A 96 96 0 0 1 408 168"/>
+    <g class="ticks">
+      <line x1="72" y1="168" x2="96" y2="168"/>
+      <line x1="96.8" y1="108" x2="117.6" y2="120"/>
+      <line x1="132" y1="64.1" x2="144" y2="84.9"/>
+      <line x1="192" y1="48" x2="192" y2="72"/>
+      <line x1="252" y1="64.1" x2="240" y2="84.9"/>
+      <line x1="287.2" y1="108" x2="266.4" y2="120"/>
+      <line x1="312" y1="168" x2="288" y2="168"/>
+    </g>
+    <line class="needle" x1="192" y1="168" x2="268" y2="92"/>
+    <circle class="hub" cx="192" cy="168" r="10"/>
+  </svg>
+  <div class="cv-name">
+    <h1>Foundry</h1>
+    <p>One house style for Lodestar, nuthatch and cargopete: brick, rust, and machines that show real numbers.</p>
+  </div>
+</div>
+<style>
+  .cv { position: relative; width: 960px; height: 288px; background: var(--bg); overflow: hidden; }
+  .cv-art { position: absolute; left: 480px; top: 0; width: 480px; height: 288px; }
+  .b-elev { fill: var(--bg-elev); }
+  .b-ink { fill: var(--accent-ink); }
+  .b-copper { fill: var(--metal-copper); }
+  .b-bad { fill: var(--bad); }
+  .b-accent { fill: var(--accent); }
+  .arc { fill: none; stroke: var(--text-muted); stroke-width: 1; }
+  .ticks line { stroke: var(--text); stroke-width: 2; }
+  .needle { stroke: var(--accent); stroke-width: 3; stroke-linecap: round; }
+  .hub { fill: var(--metal-brass); }
+  .cv-name { position: absolute; left: 48px; bottom: 40px; width: 420px; }
+  .cv-name h1 { font-family: var(--font-display); font-weight: 500; font-size: 96px; line-height: 0.92; letter-spacing: -0.05em; color: var(--text); margin: 0 0 16px; }
+  .cv-name p { font-family: var(--font-sans); font-size: 14px; line-height: 1.5; color: var(--text-muted); margin: 0; }
+</style>
