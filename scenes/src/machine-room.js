@@ -114,9 +114,8 @@ export function createMachineRoom(canvas, opts = {}) {
   }
   const cableMat = new THREE.MeshStandardMaterial({ color: 0x14100d, roughness: 0.95, metalness: 0 });
   for (const x of [-2.5, 2.6]) {
-    const pts = [];
-    for (let z = 6; z > -90; z -= 3) pts.push(new THREE.Vector3(x + Math.sin(z * 0.2 + x) * 0.15, 0.04, z));
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 300, 0.04, 6, false), cableMat));
+    const run = new THREE.LineCurve3(new THREE.Vector3(x, 0.04, 6), new THREE.Vector3(x, 0.04, -90));
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(run, 1, 0.04, 6, false), cableMat));
   }
   lamps.count = nLamps;
   lamps.instanceMatrix.needsUpdate = true;
