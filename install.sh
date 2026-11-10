@@ -5,7 +5,7 @@
 set -euo pipefail
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEST="${HOME}/.claude/skills/cargopete-style"
+DEST="${HOME}/.claude/skills/foundry"
 
 if [ -L "$DEST" ]; then
   ln -sfn "$REPO" "$DEST"

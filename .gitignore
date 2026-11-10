@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 example/fonts/*.woff2
+node_modules/
+dist/

@@ -1,0 +1,3 @@
+<!-- @dsCard group="Instruments" height=380 -->
+<div class="fd fd-instrument" style="height:360px"><div class="fd-instrument-plate">RPC <b>calls / min</b></div><div id="r" style="position:absolute;inset:0"></div></div>
+<script>function go(){var r=Foundry.ValveRadio(document.getElementById('r'),{min:0,max:60,value:29.4,label:'rpc / min',digits:1});setTimeout(function(){r.set(31.2)},1500);}var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js';s.onload=go;document.head.appendChild(s);</script>

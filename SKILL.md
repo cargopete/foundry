@@ -1,9 +1,14 @@
 ---
-name: cargopete-style
-description: The cargopete house frontend style, extracted from nuthatch-indexer.com, yetanothertaskrunner.com and redstart-lang.com. A single mandated palette - warm near-black ground, slate-blue and terracotta accents, warm off-white ink - with monospace instrument labels, hairline borders, macro whitespace, a real terminal transcript as the hero artefact, bento grids, and an honest comparison table that admits where the product loses. Also carries the dashboard dialect from lodestar-dashboard.com: one brick accent, a red kept for bad news, type in rem at a 112.5% root, a sidebar-and-topbar frame, and panels that say when a read failed. Use when building or revamping a landing page, docs site, dashboard or developer-tool site in this style, when asked for "the nuthatch style", "the house style", "my style", "cargopete style", or when refactoring an existing site to match them.
+name: foundry
+description: Foundry, the house style of cargopete.com, nuthatch-indexer.com and nuthatch-indexer.com/analytics - brick and rust on warm dark, with steampunk 3D scenery from scenes/ - plus the earlier cargopete house frontend style it grew from, extracted from nuthatch-indexer.com, yetanothertaskrunner.com and redstart-lang.com. A single mandated palette - warm near-black ground, slate-blue and terracotta accents, warm off-white ink - with monospace instrument labels, hairline borders, macro whitespace, a real terminal transcript as the hero artefact, bento grids, and an honest comparison table that admits where the product loses. Also carries the dashboard dialect from lodestar-dashboard.com: one brick accent, a red kept for bad news, type in rem at a 112.5% root, a sidebar-and-topbar frame, and panels that say when a read failed. Use when building or revamping a landing page, docs site, dashboard or developer-tool site in this style, when asked for "the nuthatch style", "the house style", "my style", "cargopete style", or when refactoring an existing site to match them.
 ---
 
 # cargopete style
+
+> **Foundry is current.** The three sites ship Foundry: `tokens.css` and `foundry.css` at the repo
+> root, the 3D scenery in `scenes/` (`npm run build` there gives `dist/scenes.min.js`, which sites
+> vendor as `public/foundry/scenes.js`), and the rules in `reference/foundry.md`. Where this file
+> and Foundry disagree, Foundry wins. The sections below are the style it grew from.
 
 ## 0. The doctrine
 

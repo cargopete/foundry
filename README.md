@@ -1,93 +1,54 @@
-# cargopete style
+# Foundry
 
-A Claude Code skill that carries one frontend house style: warm near-black ground,
-slate-blue and terracotta accents, monospace instrument labels, hairline borders,
-macro whitespace, and a terminal showing a transcript that is actually true.
+The house style of [cargopete.com](https://cargopete.com),
+[nuthatch-indexer.com](https://nuthatch-indexer.com) and
+[nuthatch-indexer.com/analytics](https://nuthatch-indexer.com/analytics/): brick and rust on a
+warm dark ground, monospace instrument labels, hairline borders, and steampunk 3D scenery behind
+the hero rather than decoration on top of it.
 
-It was extracted from four sites that already ship it:
+It is also a Claude Code skill (`SKILL.md`), so a session can build or retrofit a site in it.
 
-- [nuthatch-indexer.com](https://nuthatch-indexer.com) - canonical, and the source of
-  the palette
-- [yetanothertaskrunner.com](https://yetanothertaskrunner.com) - the atmospheric texture
-- [redstart-lang.com](https://redstart-lang.com) - the before/after diptych
-- [engine.camp](https://engine.camp) - the scope panel
-- [lodestar-dashboard.com](https://www.lodestar-dashboard.com) - the dashboard dialect
+> **Brick labels things. Red reports things.**
 
-All four began from the `minimalist-ui` protocol in
-[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) and then diverged in the
-same direction, which is what made the divergence worth writing down.
-
-## What makes it different from a taste protocol
-
-Most design skills hand you a method for deriving colour. This one hands you the
-colour. The palette in `reference/tokens.css` is mandated: sixteen tokens, validated in
-both themes, and not open for per-project reinterpretation. What varies between sites
-is subject, structure, illustration and texture. Not colour.
-
-That is the entire point of a house style. Three of the four exemplars above disagree
-with each other about colour, which is precisely why the mandate exists now.
-
-The palette is a **pair**, and both halves have a job: if a shell printed it, it is the
-slate blue; if a person wrote it, it is the terracotta. Kickers, eyebrows, stat units
-and list markers are the terracotta half, and a page that skips them comes out reading
-as blue on warm grey. There is a grep for it in the checklist.
-
-## The dashboard dialect
-
-A dashboard someone works in for an hour is not a landing page read once, and two of the
-landing rules fail there. `data-palette="brick"` swaps the pair for one brick accent and a
-red that only ever means bad news, and `reference/dashboard.md` carries the rest: type in rem
-at a 112.5% root, the sidebar-and-topbar frame, and panels that say when a read failed rather
-than showing zero. It was taken from Lodestar, and `example/dashboard.html` renders it.
-
-## Install
+## Install the skill
 
 ```bash
-git clone https://github.com/cargopete/cargopete-style.git
-cd cargopete-style
+git clone https://github.com/cargopete/foundry.git
+cd foundry
 ./install.sh
 ```
 
-Then start a Claude Code session and ask for the house style, or ask to revamp an
-existing site into it.
+Then start a Claude Code session and ask for the house style, or ask to revamp an existing site
+into it.
+
+## Build the scenery
+
+```bash
+cd scenes
+npm install
+npm run build        # dist/scenes.min.js, three bundled
+```
+
+A site vendors `dist/scenes.min.js` as `public/foundry/scenes.js` and calls `createMachineRoom`,
+`createWorkbench`, `createSea` or `createAmbient(canvas, { kit })`. `npm run dev` serves
+`index.html` with every scene for a look.
 
 ## Contents
 
 | Path | What it is |
 |---|---|
-| `SKILL.md` | The doctrine, the palette, the page grammar, the artefact list, the banned list |
-| `reference/tokens.css` | The mandated palette. Ship it verbatim |
-| `reference/components.md` | Markup and CSS for all seven artefacts |
-| `reference/dashboard.md` | The dashboard dialect: brick palette, rem type, the frame, honest failure |
-| `reference/retrofit.md` | An ordered procedure for bringing an existing site over |
-| `reference/voice.md` | Copy rules, and the banned vocabulary |
+| `tokens.css`, `tokens.json` | Foundry's tokens, dark first, with a measured light theme. `build-tokens.mjs` writes the CSS from the JSON |
+| `foundry.css` | Base styles and component classes |
+| `scenes/` | The 3D scenery: machine room, workbench, sea, observatory, and the ambient layer |
+| `fonts/` | Space Grotesk and JetBrains Mono, woff2, subset for nuthatch-indexer.com |
+| `components/` | Previews of Button, Badge, SectionHead, StatGrid, Readout, InstallLine, Sidebar, and the retired instruments |
+| `foundry.js`, `vendor/` | The retired instrument bundle (NeedleGauge, NixieCounter, ValveRadio, CRTTerminal) |
+| `reference/foundry.md` | Foundry's rules: content, colour, type, layout, motion, accessibility |
+| `SKILL.md` | The skill, and the earlier cargopete style Foundry grew from |
+| `reference/` | Tokens, components, the dashboard dialect, retrofit procedure and voice of the earlier style |
 | `tools/contrast.py` | Palette validator. Exits non-zero, drops into CI |
-| `example/index.html` | Reference render: every artefact, one page, no build step |
-| `example/dashboard.html` | Reference render of the dashboard dialect |
-
-## Validate
-
-```bash
-python3 tools/contrast.py
-```
-
-Checks every ink and accent against all four surfaces in both themes, not merely
-against the page ground. It caught two AA failures in the shipped sites while this
-skill was being written, both now corrected here.
-
-`--text-faint` is listed DECORATIVE rather than failing. That is a contract: it carries
-kickers, window titles and timestamps, and never body copy, a link, or the only
-instance of a fact.
-
-## Look at it first
-
-```bash
-open example/index.html
-```
-
-No build step, no dependencies, and the only colour literals in the file are inside the
-code samples that are meant to show them.
+| `example/` | Reference renders of the earlier style, no build step |
 
 ## Licence
 
-MIT.
+MIT. The fonts are under the SIL Open Font License and three.js is MIT.
