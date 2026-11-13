@@ -1,0 +1,55 @@
+# yatr - https://github.com/cargopete/yatr
+#
+# The style itself is static files. What builds: tokens.css from tokens.json, and the scenery bundle.
+
+[toolchain.node]
+version = "26.11.1"
+url = "https://nodejs.org/dist/v{version}/node-v{version}-{os}-{arch}.tar.gz"
+bin = "node-v{version}-{os}-{arch}/bin"
+
+[settings]
+cache = true
+
+[tasks.tokens]
+desc = "Regenerate tokens.css from tokens.json"
+run = ["node build-tokens.mjs"]
+sources = ["tokens.json", "build-tokens.mjs"]
+outputs = ["tokens.css"]
+
+[tasks.tokens-drift]
+desc = "Fail if the committed tokens.css is not what tokens.json generates"
+depends = ["tokens"]
+run = ["git diff --exit-code -- tokens.css"]
+no_cache = true
+
+[tasks.contrast]
+desc = "Every ink and accent against every surface, AA or fail"
+run = ["python3 tools/contrast.py"]
+sources = ["tools/contrast.py"]
+
+# Not cached: node_modules is gitignored, so yatr cannot see whether it exists.
+[tasks.scenes-install]
+desc = "Install the scenery's dependencies from the lockfile"
+cwd = "scenes"
+run = ["npm ci --no-audit --no-fund"]
+no_cache = true
+
+[tasks.scenes]
+desc = "Build scenes/dist/scenes.min.js, three bundled"
+cwd = "scenes"
+depends = ["scenes-install"]
+run = ["npm run build"]
+sources = ["src/**", "public/**", "index.html", "vite.config.js", "package-lock.json"]
+outputs = ["dist/**"]
+
+[tasks.scenes-dev]
+desc = "Vite dev server for the scenery"
+cwd = "scenes"
+depends = ["scenes-install"]
+foreground = true
+run = ["npm run dev"]
+
+[tasks.ci]
+desc = "Tokens in sync, palette passes, scenery builds"
+depends = ["tokens-drift", "contrast", "scenes"]
+run = []
