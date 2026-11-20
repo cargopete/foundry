@@ -1,6 +1,6 @@
 ---
 name: foundry
-description: Foundry, the house style of cargopete.com, nuthatch-indexer.com and nuthatch-indexer.com/analytics - brick and rust on warm dark, with steampunk 3D scenery from scenes/ - plus the earlier cargopete house frontend style it grew from, extracted from nuthatch-indexer.com, yetanothertaskrunner.com and redstart-lang.com. A single mandated palette - warm near-black ground, slate-blue and terracotta accents, warm off-white ink - with monospace instrument labels, hairline borders, macro whitespace, a real terminal transcript as the hero artefact, bento grids, and an honest comparison table that admits where the product loses. Also carries the dashboard dialect from lodestar-dashboard.com: one brick accent, a red kept for bad news, type in rem at a 112.5% root, a sidebar-and-topbar frame, and panels that say when a read failed. Use when building or revamping a landing page, docs site, dashboard or developer-tool site in this style, when asked for "the nuthatch style", "the house style", "my style", "cargopete style", or when refactoring an existing site to match them.
+description: Foundry, the house style of cargopete.com, nuthatch-indexer.com and nuthatch-indexer.com/analytics - brick and rust on warm dark, with steampunk 3D scenery from scenes/ - plus the earlier cargopete house frontend style it grew from, extracted from nuthatch-indexer.com, yetanothertaskrunner.com and redstart-lang.com. A single mandated palette - warm near-black ground, one brick accent, warm off-white ink - with monospace instrument labels, hairline borders, macro whitespace, a real terminal transcript as the hero artefact, bento grids, and an honest comparison table that admits where the product loses. Also carries the dashboard dialect from lodestar-dashboard.com: one brick accent, a red kept for bad news, type in rem at a 112.5% root, a sidebar-and-topbar frame, and panels that say when a read failed. Use when building or revamping a landing page, docs site, dashboard or developer-tool site in this style, when asked for "the nuthatch style", "the house style", "my style", "cargopete style", or when refactoring an existing site to match them.
 ---
 
 # cargopete style
@@ -9,6 +9,12 @@ description: Foundry, the house style of cargopete.com, nuthatch-indexer.com and
 > root, the 3D scenery in `scenes/` (`npm run build` there gives `dist/scenes.min.js`, which sites
 > vendor as `public/foundry/scenes.js`), and the rules in `reference/foundry.md`. Where this file
 > and Foundry disagree, Foundry wins. The sections below are the style it grew from.
+>
+> **Brick is the one accent** (`--accent` `#d0704f` in `tokens.css`), on landings and dashboards
+> alike. The slate-and-terracotta pair in sections 0 and 1 is superseded: where they say slate or
+> rust, read brick, and ignore the rust floor. Take their structure, not their colour.
+> yetanothertaskrunner.com and redstart-lang.com are still off-palette and are tracked for
+> retrofit in cargopete/yatr#58 and nuthatch-org/redstart#12.
 
 ## 0. The doctrine
 
@@ -446,7 +452,12 @@ landing-specific lines below (the rust floor, the terminal, the comparison table
 
 
 - [ ] Every colour in the built CSS appears in `reference/tokens.css`.
-- [ ] `grep -c 'var(--rust)'` on the stylesheet returns twelve or more.
+- [ ] One accent: brick. No slate, amber or second hue survives in the built CSS.
+- [ ] The type scale in `reference/foundry.md` holds: ten or fewer distinct sizes, running
+      text 16px or more.
+- [ ] Every grid fills its rows at 390px, 920px and 1440px. No orphan cell.
+- [ ] No superlative without a number. One name per thing. Nothing said twice on a page.
+- [ ] A missing value reads "Unavailable", never a dash, a zero or a green delta.
 - [ ] `grep -c '—'` across the source returns zero.
 - [ ] `python3 tools/contrast.py` passes.
 - [ ] `--text-faint` carries nothing load-bearing.
@@ -457,7 +468,9 @@ landing-specific lines below (the rust floor, the terminal, the comparison table
 - [ ] `prefers-reduced-motion: reduce` leaves a complete, still, legible page.
 - [ ] Keyboard: skip link, visible `:focus-visible` ring in accent, install line
       focusable and operable by Enter.
-- [ ] 540px, 920px and 1440px all hold. No horizontal scroll at 320px.
+- [ ] 540px, 920px and 1440px all hold. No horizontal scroll at 320px: check
+      `scrollWidth`, and screenshot the live page at 390px, because the source alone will not
+      show you a clipped install line or a nav that ate its own links.
 - [ ] No word from the banned list survives in the copy.
 
 ---
