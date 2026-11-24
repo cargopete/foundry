@@ -85,7 +85,7 @@ Every wordmark is the lowercase product name in `display` at weight 600, tracked
 
 **Superseded 2026-11-08.** Instruments that display figures read as comical, so the shipped sites use
 scenery instead: a full-bleed 3D scene behind the hero and an ambient layer of dim parts in the
-margins, both from `scenes/` (`createMachineRoom`, `createWorkbench`, `createSea`, `createAmbient`).
+margins, both from `scenes/` (`createMachineRoom`, `createWorkbench`, `createSea`, `createRelay`, `createAmbient`). `createRelay` is the one for anything that routes requests: an exchange tower, masts in rings, and requests and answers running along the cables.
 The components below remain in `components/` for reference and are not used by any site.
 
 The steampunk layer is machinery that works, not costume.
