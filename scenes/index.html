@@ -40,9 +40,10 @@ import { createMachineRoom } from './src/machine-room.js';
 import { createWorkbench } from './src/workbench.js';
 import { createObservatory } from './src/observatory.js';
 import { createSea } from './src/sea.js';
+import { createRelay } from './src/relay.js';
 const which = new URLSearchParams(location.search).get('scene') || 'machine';
-({ machine: createMachineRoom, workbench: createWorkbench, observatory: createObservatory, sea: createSea })[which](document.getElementById('c'));
-import('./src/ambient.js').then(({ createAmbient }) => createAmbient(document.getElementById('ambient'), { kit: which }));
+({ machine: createMachineRoom, workbench: createWorkbench, observatory: createObservatory, sea: createSea, relay: createRelay })[which](document.getElementById('c'));
+if (which !== 'relay') import('./src/ambient.js').then(({ createAmbient }) => createAmbient(document.getElementById('ambient'), { kit: which }));
 </script>
 </body>
 </html>
